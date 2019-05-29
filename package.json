@@ -1,0 +1,22 @@
+{
+  "name": "aows",
+  "version": "0.1.0",
+  "description": "atlas of weak signals - data generation and visualization",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "data",
+    "trends",
+    "atlas",
+    "of",
+    "weak",
+    "signals",
+    "atlas",
+    "fablab",
+    "mdef"
+  ],
+  "author": "Lucas Lorenzo Pena <lucaslpena@gmail.com>",
+  "license": "CC-BY-NC-SA-4.0"
+}
