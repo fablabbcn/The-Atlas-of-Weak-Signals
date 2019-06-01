@@ -1,6 +1,6 @@
 const gulp = require('gulp'),
     sass = require('gulp-sass'),
-    browserSync = require('browser-sync'),
+    browsersync = require('browser-sync'),
     autoprefixer = require('gulp-autoprefixer'),
     uglify = require('gulp-uglify'),
     jshint = require('gulp-jshint'),
@@ -28,64 +28,40 @@ var banner = [
     '\n'
 ].join('');
 
-
-
-/*
-
-gulp.task('css', function () {
-    return gulp.src('src/scss/style.scss')
-        .pipe(sass({errLogToConsole: true}))
-        .pipe(autoprefixer('last 4 version'))
-        .pipe(gulp.dest('app/assets/css'))
-        .pipe(cssnano())
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(header(banner, { package : package }))
-        .pipe(gulp.dest('app/assets/css'))
-        .pipe(browserSync.reload({stream:true}));
-});
-
-gulp.task('browser-sync', function() {
-    browserSync.init(null, {
+function browserSync(done) {
+    browsersync.init({
         server: {
-            baseDir: "app"
-        }
+            baseDir: "./app"
+        },
+        port: 3000
     });
-});
-gulp.task('bs-reload', function () {
-    browserSync.reload();
-});
+    done();
+}
+function browserSyncReload(done) {
+    browsersync.reload();
+    done();
+}
+function watchFiles(){
+    gulp.watch('src/js/**/*', gulp.series(scripts));
+    gulp.watch('src/sass/**/*', gulp.series(styles));
 
-gulp.task('default', ['css', 'js', 'browser-sync'], function () {
-    // gulp.watch("src/scss/*<<<<<</*.scss", ['css']);
-    gulp.watch("src/js/*.js", ['js']);
-    gulp.watch("app/*.html", ['bs-reload']);
-});
-
-gulp.task('deploy', ['css', 'js'], function(cb) {
-    ghPages.publish(path.join(process.cwd(), 'app'), cb);
-});
-
-*/
-
-
+}
 
 function clean(){
-    return del(["pub/assets/*"]);
+    return del(['app/assets/*']);
 }
-
-
-function css(){
+function styles(){
     return ( gulp.src('src/sass/style.scss')
-        .pipe(sass({errLogToConsole: true}))
-        // .pipe(autoprefixer('last 4 version'))
-        .pipe(gulp.dest('pub/assets'))
-        .pipe(cssnano())
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(header(banner, { package : package }))
-        .pipe(gulp.dest('pub/assets'))
+            .pipe(sass({errLogToConsole: true}))
+            .pipe(autoprefixer('last 4 version'))
+            .pipe(gulp.dest('app/assets'))
+            .pipe(cssnano())
+            .pipe(rename({ suffix: '.min' }))
+            .pipe(header(banner, { package : package }))
+            .pipe(gulp.dest('app/assets'))
+            .pipe(browsersync.stream())
     );
 }
-
 function scripts(){
     return (gulp.src('src/js/*.js')
             .pipe(sourcemaps.init())
@@ -93,18 +69,23 @@ function scripts(){
             .pipe(header(banner, { package : package }))
             .pipe(concat('scripts.js'))
             .pipe(sourcemaps.write())
-            .pipe(gulp.dest("pub/assets/"))
+            .pipe(gulp.dest('app/assets/'))
             .pipe(uglify())
             .pipe(rename({ suffix: '.min' }))
-            .pipe(gulp.dest("pub/assets/"))
+            .pipe(gulp.dest('app/assets/'))
+            .pipe(browsersync.stream())
     );
 }
 
-const js = gulp.series(scripts);
-const build = gulp.series(clean, gulp.parallel(scripts, css));
 
-exports.js = js;
+const js = gulp.series(scripts);
+const build = gulp.series(clean, gulp.parallel(scripts, styles));
+const watch = gulp.parallel(watchFiles, browserSync);
+
+
+exports.js = scripts;
 exports.clean = clean;
-exports.sass = css;
+exports.css = styles;
+exports.watch = watch;
 exports.build = build;
 exports.default = build;

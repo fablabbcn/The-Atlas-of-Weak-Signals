@@ -1,9 +1,4 @@
-body{
+body {
   min-width: 100vw;
   min-height: 100vh;
-  margin: 0;
-}
-
-canvas{
-
-}
+  margin: 0; }

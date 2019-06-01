@@ -6,4 +6,4 @@
  * @version 0.1.0
  * Copyright 2019. CC-BY-NC-SA-4.0 licensed.
  */
-body{background:red}
+body{min-width:100vw;min-height:100vh;margin:0}
