@@ -1,4 +1,4 @@
-function Particle(x,y, imgLoc){
+function Particle(x,y, atlasobj){
     this.pos = createVector(x, y);
     this.vel = createVector(random(-2,2),random(-2,2));
     this.acc = createVector(0,-8);
@@ -6,7 +6,7 @@ function Particle(x,y, imgLoc){
     this.maxSpeed = .3;
     this.maxForce = 1;
     this.theta = 0.0;
-    this.img = imgLoc;
+    this.atlas = atlasobj;
     this.gifShow = false;
     this.paused = true; // set to true
     this.frozen = true;
@@ -32,11 +32,11 @@ function Particle(x,y, imgLoc){
 //         this.frozen = false;
 //       }
 //     }
-    };
+    }
 
     this.update = function(){
         //deadFIX
-        this.spawn();
+        // this.spawn();
         this.vel.add(this.acc);
         this.vel.limit(this.maxSpeed);
         this.pos.add(this.vel);
@@ -52,8 +52,11 @@ function Particle(x,y, imgLoc){
         translate(this.pos.x, this.pos.y);
         rotate(this.theta);
 
-        rect(0,0,10,10);
+        // rect(0,0,10,10);
+        // text(this.atlas.kw, 0,0, 100,20);
 
+        textSize(15);
+        text(this.atlas.kw, 0,0,200,200);
         // if (this.paused) { //paused
         //print('paused');
         //print('frozen');
@@ -100,5 +103,9 @@ function Particle(x,y, imgLoc){
     this.applyForce = function(force) {
         this.acc.add(force);
     }
-
+    this.applyGravity = function(){ //ideally this would take obj with its own x,y...
+        var wordcord = createVector(width/2,height/2);
+        var grav = p5.Vector.sub(wordcord, this.pos);
+        this.applyForce(grav);
+    }
 }

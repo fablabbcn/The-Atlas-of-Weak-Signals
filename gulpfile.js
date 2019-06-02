@@ -44,7 +44,6 @@ function browserSyncReload(done) {
 function watchFiles(){
     gulp.watch('src/js/**/*', gulp.series(scripts));
     gulp.watch('src/sass/**/*', gulp.series(styles));
-
 }
 
 function clean(){
