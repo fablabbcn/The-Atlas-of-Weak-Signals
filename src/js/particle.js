@@ -1,47 +1,35 @@
-function Particle(x,y, atlasobj){
+function Particle(x,y,a){
+    this.atlas = a;
+
     this.pos = createVector(x, y);
-    this.vel = createVector(random(-2,2),random(-2,2));
+    this.vel = createVector(random(-3,3),random(-3,3));
     this.acc = createVector(0,-8);
-    this.size = 20;
-    this.maxSpeed = .3;
-    this.maxForce = 1;
+
+    // this.vel = createVector(0,0);
+    // this.acc = createVector(0,0);
+
+    this.mass = 10;
+    this.G = 5;
+    this.previousVel = createVector(0,0);
+    this.maxSpeed = 5;
+
     this.theta = 0.0;
-    this.atlas = atlasobj;
-    this.gifShow = false;
-    this.paused = true; // set to true
-    this.frozen = true;
-    this.itvl = floor(random(200,1000));
+    this.size = 20;
+    // this.maxForce = 1;
+
 
 
     this.spawn = function(){
-//     if( (this.img.frame([]) > 100) || (this.img.frame([]) < 5) ){
-//       if (this.gifShow == true) {
-//         //print('finished showing');
-//         this.paused = true;
-//       }
-//       this.gifShow = false; // hidden
-//     } else {
-//       this.gifShow = true; // showing
-//     }
 
-
-//     if (this.frozen) {
-//       if( (frameCount % this.itvl) == 0){
-//         //print('thaw');
-//         this.img.play();
-//         this.frozen = false;
-//       }
-//     }
     }
 
     this.update = function(){
-        //deadFIX
         // this.spawn();
+        this.edges();
         this.vel.add(this.acc);
         this.vel.limit(this.maxSpeed);
         this.pos.add(this.vel);
         this.acc.set(0,0);
-        this.border();
     }
 
     this.display = function(){
@@ -50,13 +38,12 @@ function Particle(x,y, atlasobj){
         var r = 4;
         push();
         translate(this.pos.x, this.pos.y);
-        rotate(this.theta);
+        // rotate(this.theta);
 
-        // rect(0,0,10,10);
-        // text(this.atlas.kw, 0,0, 100,20);
-
+        // rect(0,0,this.size,this.size);
+        textAlign(CENTER, CENTER);
         textSize(15);
-        text(this.atlas.kw, 0,0,200,200);
+        text(this.atlas.kw, 0,0);
         // if (this.paused) { //paused
         //print('paused');
         //print('frozen');
@@ -70,7 +57,7 @@ function Particle(x,y, atlasobj){
         pop();
     }
 
-    this.border = function(){
+    this.edges = function(){
         if (this.pos.x < -this.size) this.pos.x = width+this.size;
         if (this.pos.y < -this.size) this.pos.y = height+this.size;
         if (this.pos.x > width+this.size) this.pos.x = -this.size;
@@ -100,12 +87,44 @@ function Particle(x,y, atlasobj){
             this.applyForce(steer);
         }
     }
+
     this.applyForce = function(force) {
-        this.acc.add(force);
+        var f = force.copy();
+        f.div(this.mass);
+        this.acc.add(f);
     }
-    this.applyGravity = function(){ //ideally this would take obj with its own x,y...
-        var wordcord = createVector(width/2,height/2);
-        var grav = p5.Vector.sub(wordcord, this.pos);
-        this.applyForce(grav);
+
+    //calculate attraction
+    this.calculateAttraction = function(obj){
+        //calculate direction of force
+        var force = p5.Vector.sub(this.pos, obj.pos);
+
+        //distance between objects
+        var distance = force.mag();
+        //limit vector to eliminate extreme values at very close or very far
+        //distance = constrain(distance,20,25);
+        //Not really important but is what it is to get direction
+        force.normalize();
+
+        //calculate gravitational from magniitude
+        var strength = (this.G * this.mass * obj.mass) / (distance * distance);
+
+        //get force vector --> magnitude * direction
+        force.mult(strength);
+        //var force;
+        return force;
     }
+
+    this.applyGravity = function(){
+        for (var i = 0; i < attractors.length; i++){
+            var a = attractors[i];
+            if (a.ws === this.atlas.ws){ //get everyone applied to and attract to it
+                // console.log('attracted to: ' + a.ws);
+                var f = a.calculateAttraction(this);
+                // console.log(f);
+                this.applyForce(f);
+            }
+        }
+    }
+
 }
