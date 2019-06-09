@@ -1,12 +1,20 @@
-function Attractor(weaksignal) {
+function Attractor(weaksignal, xCord, yCord) {
     this.ws = weaksignal;
+    var length = width - 2*padding;
+    var interval = (length / grid);
+    var centerX = padding + interval * (xCord+1);
+    centerX = centerX - interval/2;
+    length = height - 2*padding;
+    interval = (length / grid);
+    var centerY = padding + interval * (yCord+1);
+    centerY = centerY - interval/2;
 
-    this.pos = createVector(width/2, height/2);
+    this.pos = createVector(centerX, centerY);
     this.vel = createVector(0,0);
     this.acc = createVector(0,0);
 
-    this.mass = 20;
-    this.G = 20; //was 80
+    this.mass = 6;
+    this.G = 15; //was 80
     this.scaler = 5;
 
     this.calculateAttraction = function(p){

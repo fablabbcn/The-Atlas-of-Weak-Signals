@@ -1,4 +1,62 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
 body {
-  min-width: 100vw;
-  min-height: 100vh;
-  margin: 0; }
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  position: relative;
+  font-family: 'Overpass Mono', monospace !important;
+  color: white;
+  font-size: 42px; }
+
+#defaultCanvas0 {
+  z-index: -1; }
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  padding: 100px; }
+
+.layered-content {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "s00 s01 s02" "s10 s11 s12" "s20 s21 s22"; }
+  .layered-content > div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+
+.s00 {
+  grid-area: s00; }
+
+.s01 {
+  grid-area: s01; }
+
+.s02 {
+  grid-area: s02; }
+
+.s10 {
+  grid-area: s10; }
+
+.s11 {
+  grid-area: s11; }
+
+.s12 {
+  grid-area: s12; }
+
+.s20 {
+  grid-area: s20; }
+
+.s21 {
+  grid-area: s21; }
+
+.s22 {
+  grid-area: s22; }

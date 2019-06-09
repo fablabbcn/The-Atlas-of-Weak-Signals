@@ -11,7 +11,7 @@ function Particle(x,y,a){
     this.mass = 10;
     this.G = 5;
     this.previousVel = createVector(0,0);
-    this.maxSpeed = 5;
+    this.maxSpeed = 3;
 
     this.theta = 0.0;
     this.size = 20;
@@ -81,7 +81,7 @@ function Particle(x,y,a){
         if (count > 0) {
             sum.div(count);
             sum.normalize();
-            sum.mult(this.maxSpeed * 10);
+            sum.mult(this.maxSpeed * 2);
             var steer = p5.Vector.sub(sum, this.velocity);
             steer.limit(this.maxforce);
             this.applyForce(steer);
