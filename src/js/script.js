@@ -1,6 +1,6 @@
-var text1 = new Blotter.Text("Hello", {
+var text1 = new Blotter.Text("under construction 👁‍🗨", {
     family : "Overpass Mono",
-    size : 120,
+    size : 84,
     fill : "#171717"
 });
 
@@ -10,7 +10,7 @@ var text2 = new Blotter.Text("Sup", {
     fill : "#171717"
 });
 
-var material = new Blotter.FliesMaterial();
+var material = new Blotter.ChannelSplitMaterial();
 
 var blotter1 = new Blotter(material, { texts : text1 });
 var scope1 = blotter1.forText(text1);
@@ -22,5 +22,5 @@ scope1.appendTo(document.body);
 
 setTimeout(function(){
     var element = $('.b-canvas').detach();
-    $('.s00').append(element);
+    // $('.s00').append(element);
 },2000);

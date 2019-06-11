@@ -42,7 +42,7 @@ function Particle(x,y,a){
 
         // rect(0,0,this.size,this.size);
         textAlign(CENTER, CENTER);
-        textSize(15);
+        textSize(8);
         text(this.atlas.kw, 0,0);
         // if (this.paused) { //paused
         //print('paused');

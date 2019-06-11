@@ -14,7 +14,7 @@ function Attractor(weaksignal, xCord, yCord) {
     this.acc = createVector(0,0);
 
     this.mass = 6;
-    this.G = 15; //was 80
+    this.G = 20; //was 80
     this.scaler = 5;
 
     this.calculateAttraction = function(p){

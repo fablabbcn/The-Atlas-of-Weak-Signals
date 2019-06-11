@@ -6,11 +6,12 @@ var keywords = [];
 var attractors = [];
 var jsonData = {};
 var padding = 100;
-var grid = 3;
+var grid = 5;
 
 
 function preload() {
-    var jsonFile = "../data/fromspreadsheet-1.json";
+    // var jsonFile = "../data/weaksignals--placeholders.json";
+    var jsonFile = "../data/fromspreadsheet.json";
     jsonData = loadJSON(jsonFile);
     console.log(jsonData);
 }
@@ -41,7 +42,7 @@ function setup() {
     frameRate(60);
 
     weaksignals.forEach(function(ws, i){
-        keywords[0].forEach(function(kw, i){
+        keywords[i].forEach(function(kw, j){
             var atls = new atlasObj(ws, kw);
             console.log(atls);
             particles.push(new Particle(random(50, width - 50), random(50, height - 50), {ws:ws, kw:kw}));
@@ -61,7 +62,7 @@ function draw() {
     }
 
     fill(100);
-    textSize(32);
+    textSize(14);
     fill(255);
     attractors.forEach(function(a){
         a.update();
@@ -76,9 +77,9 @@ function setupWeakSignals(){
     //clipping keyword list to random selected words until wordCount reached
     for (var i in jsonData){
         var wordCount = 10;
-        var newItems = [];
         var items, index, item;
         if (jsonData[i]["keywords"].length > wordCount) {
+            var newItems = [];
             for (var j = 0; j < wordCount; j++) {
                 items = jsonData[i]["keywords"];
                 index = Math.floor(Math.random() * items.length);
@@ -86,10 +87,11 @@ function setupWeakSignals(){
                 newItems.push(item[0]);
                 // console.log(item[0]);
             }
-            // console.log(newItems);
+            console.log(newItems);
             jsonData[i]["keywords"] = newItems.slice();
         }
     }
+    // console.log(jsonData);
 
 
     // console.log('setup');
@@ -101,14 +103,15 @@ function setupWeakSignals(){
         attractors.push(new Attractor(jsonData[i]["name"], j, k));
         weaksignals.push(jsonData[i]["name"]);
         keywords.push(jsonData[i]["keywords"]);
-        $((".s" + j)+k).html(jsonData[i]["name"]);
-        if (j == 2){
+        // $((".s" + j)+k).eq(i).html(jsonData[i]["name"]);
+        if (j == (grid-1)){
             k++;
             j = -1;
         }
         j++;
     }
 
+    // console.log(weaksignals)
     // 3 * 3 grid
 }
 
