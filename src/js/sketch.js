@@ -51,7 +51,8 @@ function setup() {
 }
 
 function draw() {
-    background('#000');
+    background('#ffffff');
+
 
     for (var i = 0; i < particles.length; i++) {
         particles[i].applyGravity();
@@ -61,9 +62,8 @@ function draw() {
         particles[i].display();
     }
 
-    fill(100);
     textSize(14);
-    fill(255);
+    fill(0);
     attractors.forEach(function(a){
         a.update();
         a.display();
@@ -76,7 +76,7 @@ function setupWeakSignals(){
 
     //clipping keyword list to random selected words until wordCount reached
     for (var i in jsonData){
-        var wordCount = 10;
+        var wordCount = 5;
         var items, index, item;
         if (jsonData[i]["keywords"].length > wordCount) {
             var newItems = [];

@@ -17,44 +17,54 @@ function Particle(x,y,a){
     this.size = 20;
     // this.maxForce = 1;
 
+    this.history = [];
 
-
-    this.spawn = function(){
-
-    }
 
     this.update = function(){
-        // this.spawn();
         this.edges();
         this.vel.add(this.acc);
         this.vel.limit(this.maxSpeed);
         this.pos.add(this.vel);
         this.acc.set(0,0);
+
+
+        if (frameCount % 10 == 1){
+            var v = createVector(this.pos.x, this.pos.y);
+            this.history.push(v);
+            if (this.history.length > 8){
+                this.history.splice(0,1);
+            }
+            // console.log(this.pos);
+            // console.log("current ^ last v");
+            // console.log(this.history);
+        }
     }
 
     this.display = function(){
+        this.trailing();
         var theta = this.vel.heading() + radians(90);
         this.theta += (this.vel.x * this.vel.mag()) / 20;
         var r = 4;
         push();
         translate(this.pos.x, this.pos.y);
         // rotate(this.theta);
-
-        // rect(0,0,this.size,this.size);
         textAlign(CENTER, CENTER);
         textSize(8);
         text(this.atlas.kw, 0,0);
-        // if (this.paused) { //paused
-        //print('paused');
-        //print('frozen');
-        // this.paused = false;
-        // this.frozen = true;
-        // this.img.pause();
-        // }
-        // if (this.img.loaded()){
-        //   image(this.img, this.size/-2, this.size/-2, this.size, this.size);
-        // }
         pop();
+    }
+
+    this.trailing = function(){
+        for (var i = 0; i < this.history.length; i++){
+            var pos = this.history[i];
+            push();
+            translate(pos.x, pos.y);
+            stroke(100);
+            fill(225);
+
+            point(0,0);
+            pop();
+        }
     }
 
     this.edges = function(){
