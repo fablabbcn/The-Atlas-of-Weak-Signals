@@ -24,3 +24,7 @@ setTimeout(function(){
     var element = $('.b-canvas').detach();
     // $('.s00').append(element);
 },2000);
+
+//https://codepen.io/SimonEvans/pen/PQKgyQ
+// https://github.com/bradley/blotter
+// https://blotter.js.org/#/documentation

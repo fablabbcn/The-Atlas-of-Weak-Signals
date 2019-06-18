@@ -51,7 +51,8 @@ function setup() {
 }
 
 function draw() {
-    background('#ffffff');
+    // background('#ffffff');
+    clear();
 
 
     for (var i = 0; i < particles.length; i++) {
