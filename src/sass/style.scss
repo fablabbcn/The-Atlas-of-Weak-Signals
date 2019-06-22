@@ -1,3 +1,14 @@
+@font-face {font-family: "Nexa Bold";
+  src: url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.eot");
+  src: url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.eot?#iefix") format("embedded-opentype"),
+  url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.woff2") format("woff2"),
+  url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.woff") format("woff"),
+  url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.ttf") format("truetype"),
+  url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.svg#Nexa Bold") format("svg");
+}
+
+
+
 * {
   box-sizing: border-box;
 }
@@ -8,19 +19,21 @@ body{
   margin: 0;
   position: relative;
 
-  font-family: 'Overpass Mono', monospace !important;
-  color: white;
+  font-family: 'Nexa Bold', sans-serif !important;
+  color: black;
   font-size: 42px;
+  background: black;
 
   //used for projection//
-  transform: scaleX(-1);
+  //transform: scaleX(-1);
 }
 
 h1{
-  font-family: 'Overpass Mono', monospace !important;
-  color: black;
+  font-family: 'Nexa Bold', sans-serif !important;
+  color: white;
   font-size: 28px;
   text-align: center;
+  text-transform: uppercase;
 }
 
 canvas{
@@ -45,11 +58,17 @@ canvas{
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas: "s00 s01 s02" "s10 s11 s12" "s20 s21 s22";
 
-  > div{
+  > div {
     display: flex;
     justify-content: center;
+    align-content: center;
     align-items: center;
   }
+
+  h1{
+    font-size: 12px;
+  }
+
 }
 
 .s00 { grid-area: s00; }
@@ -81,9 +100,10 @@ canvas{
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-areas: "s00 s01 s02 s03" "s10 s11 s12 s13" "s20 s21 s22 s23" "s30 s31 s32 s33";
 
-  > div{
+  > div {
     display: flex;
     justify-content: center;
+    align-content: center;
     align-items: center;
   }
 }

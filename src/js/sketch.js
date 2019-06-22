@@ -103,7 +103,7 @@ function setupWeakSignals(){
         attractors.push(new Attractor(jsonData[i]["name"], j, k));
         weaksignals.push(jsonData[i]["name"]);
         keywords.push(jsonData[i]["keywords"]);
-        // $((".s" + j)+k).eq(i).html(jsonData[i]["name"]);
+        $((".s" + j)+k).html(jsonData[i]["name"]);
         if (j == (grid-1)){
             k++;
             j = -1;

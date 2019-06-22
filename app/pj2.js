@@ -1,3 +1,6 @@
+function randomIntFromInterval(min,max){ //min max may be included
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
 /** Attractor **/
 function Attractor(weaksignal, xCord, yCord) {
     this.ws = weaksignal;
@@ -21,6 +24,17 @@ function Attractor(weaksignal, xCord, yCord) {
     this.calculateAttraction = function(p){
         //calculate direction of force
         var force = p5.Vector.sub(this.pos, p.pos);
+
+
+
+        push();
+        var opa = noise(p.offset) * 255;
+        // console.log(opa);
+
+        stroke(color(50,50,50,opa));
+        // stroke(255);
+        line(this.pos.x, this.pos.y, p.pos.x, p.pos.y);
+        pop();
 
         //distance between objects
         var distance = force.mag();
@@ -93,6 +107,10 @@ function Attractor(weaksignal, xCord, yCord) {
 function Particle(x,y,a){
     this.atlas = a;
 
+    this.offset = randomIntFromInterval(0,100)/100;
+
+
+
     this.pos = createVector(x, y);
     this.vel = createVector(random(-3,3),random(-3,3));
     this.acc = createVector(0,-8);
@@ -113,6 +131,8 @@ function Particle(x,y,a){
 
 
     this.update = function(){
+        this.offset += 0.1;
+        // console.log(this.offset);
         this.edges();
         this.vel.add(this.acc);
         this.vel.limit(this.maxSpeed);
@@ -141,7 +161,9 @@ function Particle(x,y,a){
         translate(this.pos.x, this.pos.y);
         // rotate(this.theta);
         textAlign(CENTER, CENTER);
-        textSize(8);
+        textSize(12);
+        stroke(255);
+        fill(225);
         text(this.atlas.kw, 0,0);
         pop();
     }
@@ -151,7 +173,7 @@ function Particle(x,y,a){
             var pos = this.history[i];
             push();
             translate(pos.x, pos.y);
-            stroke(100);
+            stroke('#f2dd1c');
             fill(225);
 
             point(0,0);
@@ -233,7 +255,6 @@ function Particle(x,y,a){
 /** Sketch**/
 var particles = [];
 var limit = 10;
-var imgs = [];
 var weaksignals = [];
 var keywords = [];
 var attractors = [];
@@ -272,18 +293,11 @@ function setup() {
     setupWeakSignals();
     textFont("Overpass Mono");
     frameRate(60);
-
-    weaksignals.forEach(function(ws, i){
-        keywords[i].forEach(function(kw, j){
-            var atls = new atlasObj(ws, kw);
-            console.log(atls);
-            particles.push(new Particle(random(50, width - 50), random(50, height - 50), {ws:ws, kw:kw}));
-        });
-    })
+    setupObjects();
 }
 
 function draw() {
-    // background('#ffffff');
+    background('#000');
     clear();
 
 
@@ -303,7 +317,15 @@ function draw() {
     });
 }
 
-console.log('hello'+'world'.repeat(3));
+function setupObjects(){
+    weaksignals.forEach(function(ws, i){
+        keywords[i].forEach(function(kw, j){
+            var atls = new atlasObj(ws, kw);
+            console.log(atls);
+            particles.push(new Particle(random(50, width - 50), random(50, height - 50), {ws:ws, kw:kw}));
+        });
+    })
+}
 
 function setupWeakSignals(){
 
@@ -348,3 +370,18 @@ function setupWeakSignals(){
     // console.log(weaksignals)
     // 3 * 3 grid
 }
+
+function reInit(){
+    particles.splice(0,particles.length);
+    weaksignals.splice(0,weaksignals.length);
+    keywords.splice(0,keywords.length);
+    attractors.splice(0,attractors.length);
+
+    setupWeakSignals();
+    setupObjects();
+}
+
+
+setInterval(function(){
+    reInit();
+}, 60000 * 5);

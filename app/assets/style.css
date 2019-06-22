@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Nexa Bold";
+  src: url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.eot");
+  src: url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.woff") format("woff"), url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/c9f309b3d47969ecac64a77a6c672594.svg#Nexa Bold") format("svg"); }
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box; }
@@ -7,18 +12,17 @@ body {
   height: 100vh;
   margin: 0;
   position: relative;
-  font-family: 'Overpass Mono', monospace !important;
-  color: white;
+  font-family: 'Nexa Bold', sans-serif !important;
+  color: black;
   font-size: 42px;
-  -webkit-transform: scaleX(-1);
-      -ms-transform: scaleX(-1);
-          transform: scaleX(-1); }
+  background: black; }
 
 h1 {
-  font-family: 'Overpass Mono', monospace !important;
-  color: black;
+  font-family: 'Nexa Bold', sans-serif !important;
+  color: white;
   font-size: 28px;
-  text-align: center; }
+  text-align: center;
+  text-transform: uppercase; }
 
 #defaultCanvas0 {
   z-index: -1; }
@@ -42,9 +46,13 @@ h1 {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    -ms-flex-line-pack: center;
+        align-content: center;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center; }
+  .layered-content-pj1 h1 {
+    font-size: 12px; }
 
 .s00 {
   grid-area: s00; }
@@ -87,6 +95,8 @@ h1 {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    -ms-flex-line-pack: center;
+        align-content: center;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center; }

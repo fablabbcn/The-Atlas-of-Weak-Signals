@@ -60,7 +60,7 @@ function Attractor(weaksignal, xCord, yCord) {
         // ellipse(this.pos.x, this.pos.y, this.mass * this.scaler, this.mass * this.scaler);
         // fill(30,25,20);
         textAlign(CENTER, CENTER);
-        text(this.ws, this.pos.x, this.pos.y);
+        // text(this.ws, this.pos.x, this.pos.y);
         pop();
     }
 
