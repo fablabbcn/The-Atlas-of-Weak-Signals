@@ -25,7 +25,7 @@ body{
   background: black;
 
   //used for projection//
-  transform: scaleX(-1);
+  //transform: scaleX(-1);
 }
 
 h1{
@@ -49,6 +49,54 @@ canvas{
   height: 100vh;
   padding: 100px;
 }
+
+.layered-content{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+
+  grid-template-areas: "s00 s01 s02 s03 s04" "s10 s11 s12 s13 s14" "s20 s21 s22 s23 s24" "s30 s31 s32 s33 s34" "s40 s41 s42 s43 s44";
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  .s00 { grid-area: s00; }
+  .s01 { grid-area: s01; }
+  .s02 { grid-area: s02; }
+  .s03 { grid-area: s03; }
+  .s04 { grid-area: s04; }
+
+  .s10 { grid-area: s10; }
+  .s11 { grid-area: s11; }
+  .s12 { grid-area: s12; }
+  .s13 { grid-area: s13; }
+  .s14 { grid-area: s14; }
+
+  .s20 { grid-area: s20; }
+  .s21 { grid-area: s21; }
+  .s22 { grid-area: s22; }
+  .s23 { grid-area: s23; }
+  .s24 { grid-area: s24; }
+
+  .s30 { grid-area: s30; }
+  .s31 { grid-area: s31; }
+  .s32 { grid-area: s32; }
+  .s33 { grid-area: s33; }
+  .s34 { grid-area: s34; }
+
+  .s40 { grid-area: s40; }
+  .s41 { grid-area: s41; }
+  .s42 { grid-area: s42; }
+  .s43 { grid-area: s43; }
+  .s44 { grid-area: s44; }
+}
+
 .layered-content-pj1{
   width: 100%;
   height: 100%;

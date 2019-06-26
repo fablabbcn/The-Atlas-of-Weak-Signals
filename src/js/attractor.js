@@ -21,6 +21,17 @@ function Attractor(weaksignal, xCord, yCord) {
         //calculate direction of force
         var force = p5.Vector.sub(this.pos, p.pos);
 
+
+
+        push();
+        var opa = noise(p.offset) * 255;
+        // console.log(opa);
+
+        stroke(color(50,50,50,opa));
+        // stroke(255);
+        line(this.pos.x, this.pos.y, p.pos.x, p.pos.y);
+        pop();
+
         //distance between objects
         var distance = force.mag();
 

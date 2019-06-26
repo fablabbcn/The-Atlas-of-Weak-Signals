@@ -15,10 +15,7 @@ body {
   font-family: 'Nexa Bold', sans-serif !important;
   color: black;
   font-size: 42px;
-  background: black;
-  -webkit-transform: scaleX(-1);
-      -ms-transform: scaleX(-1);
-          transform: scaleX(-1); }
+  background: black; }
 
 h1 {
   font-family: 'Nexa Bold', sans-serif !important;
@@ -34,6 +31,76 @@ h1 {
   width: 100vw;
   height: 100vh;
   padding: 100px; }
+
+.layered-content {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "s00 s01 s02 s03 s04" "s10 s11 s12 s13 s14" "s20 s21 s22 s23 s24" "s30 s31 s32 s33 s34" "s40 s41 s42 s43 s44"; }
+  .layered-content > div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  .layered-content .s00 {
+    grid-area: s00; }
+  .layered-content .s01 {
+    grid-area: s01; }
+  .layered-content .s02 {
+    grid-area: s02; }
+  .layered-content .s03 {
+    grid-area: s03; }
+  .layered-content .s04 {
+    grid-area: s04; }
+  .layered-content .s10 {
+    grid-area: s10; }
+  .layered-content .s11 {
+    grid-area: s11; }
+  .layered-content .s12 {
+    grid-area: s12; }
+  .layered-content .s13 {
+    grid-area: s13; }
+  .layered-content .s14 {
+    grid-area: s14; }
+  .layered-content .s20 {
+    grid-area: s20; }
+  .layered-content .s21 {
+    grid-area: s21; }
+  .layered-content .s22 {
+    grid-area: s22; }
+  .layered-content .s23 {
+    grid-area: s23; }
+  .layered-content .s24 {
+    grid-area: s24; }
+  .layered-content .s30 {
+    grid-area: s30; }
+  .layered-content .s31 {
+    grid-area: s31; }
+  .layered-content .s32 {
+    grid-area: s32; }
+  .layered-content .s33 {
+    grid-area: s33; }
+  .layered-content .s34 {
+    grid-area: s34; }
+  .layered-content .s40 {
+    grid-area: s40; }
+  .layered-content .s41 {
+    grid-area: s41; }
+  .layered-content .s42 {
+    grid-area: s42; }
+  .layered-content .s43 {
+    grid-area: s43; }
+  .layered-content .s44 {
+    grid-area: s44; }
 
 .layered-content-pj1 {
   width: 100%;

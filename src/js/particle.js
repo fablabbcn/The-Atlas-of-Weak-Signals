@@ -1,6 +1,10 @@
 function Particle(x,y,a){
     this.atlas = a;
 
+    this.offset = randomIntFromInterval(0,100)/100;
+
+
+
     this.pos = createVector(x, y);
     this.vel = createVector(random(-3,3),random(-3,3));
     this.acc = createVector(0,-8);
@@ -21,6 +25,8 @@ function Particle(x,y,a){
 
 
     this.update = function(){
+        this.offset += 0.1;
+        // console.log(this.offset);
         this.edges();
         this.vel.add(this.acc);
         this.vel.limit(this.maxSpeed);
@@ -49,7 +55,9 @@ function Particle(x,y,a){
         translate(this.pos.x, this.pos.y);
         // rotate(this.theta);
         textAlign(CENTER, CENTER);
-        textSize(8);
+        textSize(12);
+        stroke(255);
+        fill(225);
         text(this.atlas.kw, 0,0);
         pop();
     }
@@ -59,7 +67,7 @@ function Particle(x,y,a){
             var pos = this.history[i];
             push();
             translate(pos.x, pos.y);
-            stroke(100);
+            stroke('#f2dd1c');
             fill(225);
 
             point(0,0);

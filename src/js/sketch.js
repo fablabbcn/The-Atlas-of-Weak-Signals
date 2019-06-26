@@ -1,6 +1,10 @@
+function randomIntFromInterval(min,max){ //min max may be included
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+
+
 var particles = [];
 var limit = 10;
-var imgs = [];
 var weaksignals = [];
 var keywords = [];
 var attractors = [];
@@ -39,18 +43,11 @@ function setup() {
     setupWeakSignals();
     textFont("Overpass Mono");
     frameRate(60);
-
-    weaksignals.forEach(function(ws, i){
-        keywords[i].forEach(function(kw, j){
-            var atls = new atlasObj(ws, kw);
-            console.log(atls);
-            particles.push(new Particle(random(50, width - 50), random(50, height - 50), {ws:ws, kw:kw}));
-        });
-    })
+    setupObjects();
 }
 
 function draw() {
-    // background('#ffffff');
+    background('#000');
     clear();
 
 
@@ -70,7 +67,15 @@ function draw() {
     });
 }
 
-console.log('hello'+'world'.repeat(3));
+function setupObjects(){
+    weaksignals.forEach(function(ws, i){
+        keywords[i].forEach(function(kw, j){
+            var atls = new atlasObj(ws, kw);
+            console.log(atls);
+            particles.push(new Particle(random(50, width - 50), random(50, height - 50), {ws:ws, kw:kw}));
+        });
+    })
+}
 
 function setupWeakSignals(){
 
@@ -103,7 +108,8 @@ function setupWeakSignals(){
         attractors.push(new Attractor(jsonData[i]["name"], j, k));
         weaksignals.push(jsonData[i]["name"]);
         keywords.push(jsonData[i]["keywords"]);
-        $((".s" + j)+k).html(jsonData[i]["name"]);
+        console.log('hit');
+        $((".s" + j)+k).html("<h1>"+jsonData[i]["name"] +"</h1>");
         if (j == (grid-1)){
             k++;
             j = -1;
@@ -115,4 +121,17 @@ function setupWeakSignals(){
     // 3 * 3 grid
 }
 
+function reInit(){
+    particles.splice(0,particles.length);
+    weaksignals.splice(0,weaksignals.length);
+    keywords.splice(0,keywords.length);
+    attractors.splice(0,attractors.length);
 
+    setupWeakSignals();
+    setupObjects();
+}
+
+
+setInterval(function(){
+    reInit();
+}, 60000 * 5);

@@ -18,7 +18,7 @@ function Attractor(weaksignal, xCord, yCord) {
     this.acc = createVector(0,0);
 
     this.mass = 6;
-    this.G = 10; //was 80
+    this.G = 8; //was 80
     this.scaler = 5;
 
     this.calculateAttraction = function(p){
@@ -161,7 +161,7 @@ function Particle(x,y,a){
         translate(this.pos.x, this.pos.y);
         // rotate(this.theta);
         textAlign(CENTER, CENTER);
-        textSize(12);
+        textSize(8);
         stroke(255);
         fill(225);
         text(this.atlas.kw, 0,0);
