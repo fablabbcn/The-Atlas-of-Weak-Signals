@@ -15,7 +15,10 @@ body {
   font-family: 'Nexa Bold', sans-serif !important;
   color: black;
   font-size: 42px;
-  background: black; }
+  background: black;
+  -webkit-transform: scaleX(-1);
+      -ms-transform: scaleX(-1);
+          transform: scaleX(-1); }
 
 h1 {
   font-family: 'Nexa Bold', sans-serif !important;
