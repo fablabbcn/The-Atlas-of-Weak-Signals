@@ -1,3 +1,5 @@
+// (function ($, window, document, undefined) {
+
 var text1 = new Blotter.Text("under construction 👁‍🗨", {
     family : "Overpass Mono",
     size : 84,
@@ -25,6 +27,20 @@ setTimeout(function(){
     var element = $('.b-canvas').detach();
     $('.modal').prepend(element);
 },2000);
+
+(function() {
+    var script = document.createElement("SCRIPT");
+    script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
+    script.type = 'text/javascript';
+    script.onload = function() {
+        $("#close").click(function (event) {
+            event.preventDefault();
+            $('.modal').hide();
+        });
+    }
+    document.getElementsByTagName("head")[0].appendChild(script);
+})(jQuery, window, document);
+
 
 //https://codepen.io/SimonEvans/pen/PQKgyQ
 // https://github.com/bradley/blotter
