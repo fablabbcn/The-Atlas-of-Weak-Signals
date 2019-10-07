@@ -14,7 +14,7 @@ var grid = 5;
 
 
 function preload() {
-    var jsonFile = "../data/fromspreadsheet.json";
+    var jsonFile = "/data/fromspreadsheet.json";
     jsonData = loadJSON(jsonFile);
     console.log(jsonData);
 }

@@ -9,7 +9,7 @@ const gulp = require('gulp'),
     cssnano = require('gulp-cssnano'),
     concat = require('gulp-concat'),
     package = require('./package.json'),
-    ghPages = require('gh-pages'),
+    ghPages = require('gulp-gh-pages'),
     path = require('path'),
     babel = require("gulp-babel"),
     del = require('del'),
@@ -69,7 +69,7 @@ function scripts(){
             .pipe(concat('scripts.js'))
             .pipe(sourcemaps.write())
             .pipe(gulp.dest('app/assets/'))
-            .pipe(uglify())
+            // .pipe(uglify())
             .pipe(rename({ suffix: '.min' }))
             .pipe(gulp.dest('app/assets/'))
             .pipe(browsersync.stream())
@@ -80,6 +80,7 @@ function scripts(){
 const js = gulp.series(scripts);
 const build = gulp.series(clean, gulp.parallel(scripts, styles));
 const watch = gulp.parallel(watchFiles, browserSync);
+gulp.task('deploy', () => gulp.src('./app/**/*').pipe(ghPages()));
 
 
 exports.js = scripts;

@@ -28,7 +28,7 @@
     "@babel/core": "^7.4.5",
     "browser-sync": "^2.26.7",
     "del": "^4.1.1",
-    "gh-pages": "^1.2.0",
+    "gulp-gh-pages": "^0.5.4",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-babel": "^8.0.0-beta.2",
