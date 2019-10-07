@@ -47,7 +47,7 @@ function watchFiles(){
 }
 
 function clean(){
-    return del(['app/assets/*']);
+    return del(['app/assets/*.js', 'app/assets/*.css']);
 }
 function styles(){
     return ( gulp.src('src/sass/style.scss')
