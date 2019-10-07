@@ -26,7 +26,8 @@ scope2.appendTo(document.body);
 setTimeout(function(){
     var element = $('.b-canvas').detach();
     $('.modal').prepend(element);
-},2000);
+},1);
+
 
 (function() {
     var script = document.createElement("SCRIPT");
