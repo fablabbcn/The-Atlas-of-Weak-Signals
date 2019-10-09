@@ -320,7 +320,7 @@ var padding = 100;
 var grid = 5;
 
 function preload() {
-  var jsonFile = "../fromspreadsheet.json";
+  var jsonFile = "/data/fromspreadsheet.json";
   jsonData = loadJSON(jsonFile);
   console.log(jsonData);
 }
